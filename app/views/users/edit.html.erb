@@ -1,0 +1,23 @@
+<h2>User info</h2>
+
+<%= form_for(@user) do |f| %>
+
+  <div class="field">
+    <label for="user_name">Name</label>
+    <%= f.text_field :name, autofocus: true, id:"inputEmail", placeholder:"名前"%>
+  </div>
+
+  <div class="field">
+    <label for="user_image">Image</label>
+    <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :introduction %><br>
+    <%= f.text_field :introduction, autofocus: true %>
+  </div>
+
+
+
+    <%= f.submit "変更を保存" %>
+<% end %>
