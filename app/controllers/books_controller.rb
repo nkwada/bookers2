@@ -12,6 +12,7 @@ before_action :correct_user, only: [:edit, :update]
         else
             @books = Book.all.reverse_order
             @user = current_user
+            flash[:notice] = 'error Book was not created'
             render :index
         end
     end
@@ -22,6 +23,7 @@ before_action :correct_user, only: [:edit, :update]
         @book = Book.new
     end
     def show
+        @booknew = Book.new
         @book = Book.find(params[:id])
         @user = current_user
         @books = Book.find(params[:id])
@@ -39,6 +41,7 @@ before_action :correct_user, only: [:edit, :update]
         if @book.update(book_params)
             redirect_to book_path(@book.id), notice: 'Book was successfully updated'
         else
+            flash[:notice] = 'error Book was not updated'
             render :edit
         end
     end
