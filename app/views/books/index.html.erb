@@ -2,15 +2,25 @@
 
 <p id="notice"><%= notice %></p>
 
+<% if @book.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 
 <div class="container">
   <div class="row">
 
 <!-- プロフィール＆投稿画面 -->
-    <div class="col-lg-3">
+    <div class="col-xs-3">
         <div class="profile-container">
-          <h2>User Info</h2>
-          <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+          <h2>User info</h2>
+          <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg" %>
 
            <table class="table tables-bordered">
             <tbody>
@@ -30,8 +40,9 @@
         </div>
 
         <div class="new_post-container">
-          <h2>New Book</h2>
+          <h2>New book</h2>
         <%= form_for(@book) do |f| %>
+
              <div class="field">
                <%= f.label :title %><br>
                <%= f.text_field :title, id: :book_title, class: 'col-xs-12' %>
@@ -47,13 +58,14 @@
         </div>
     </div>
 <!-- ↑ここまで -->
-    <div class="col-lg-9">
+    <div class="col-xs-9">
       <h2>Books</h2>
-    <table class="table table-striped">
+    <table class="table">
       <thead>
         <tr>
+          <th></th>
           <th>Title</th>
-          <th>Body</th>
+          <th>Opinion</th>
           <th colspan="3"></th>
         </tr>
       </thead>
@@ -61,10 +73,9 @@
       <tbody>
         <% @books.each do |book| %>
           <tr>
-            <td><%= book.title %></td>
+            <td><%= link_to attachment_image_tag(book.user,:profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg", size:'40x40'), book.user %></td>
+            <td><%= link_to "#{book.title}", book %></td>
             <td><%= book.body %></td>
-
-            <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>
@@ -73,6 +84,3 @@
   </div>
 </div>
 
-<br>
-
-<%= link_to 'New Post', new_book_path, class: "btn btn-default" %>

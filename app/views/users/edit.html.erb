@@ -1,5 +1,15 @@
 <h2>User info</h2>
 
+<% if @user.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for(@user) do |f| %>
 
   <div class="field">
@@ -19,5 +29,5 @@
 
 
 
-    <%= f.submit "変更を保存" %>
+    <%= f.submit %>
 <% end %>

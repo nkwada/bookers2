@@ -5,10 +5,10 @@
 <div class="container">
   <div class="row">
     <!-- プロフィール＆投稿画面 -->
-    <div class="col-lg-3">
+    <div class="col-xs-3">
         <div class="profile-container">
-          <h2>User Info</h2>
-          <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+          <h2>User info</h2>
+          <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg" %>
 
            <table class="table tables-bordered">
             <tbody>
@@ -28,7 +28,7 @@
         </div>
 
         <div class="new_post-container">
-          <h2>New Book</h2>
+          <h2>New book</h2>
         <%= form_for(@book) do |f| %>
              <div class="field">
                <%= f.label :title %><br>
@@ -45,13 +45,13 @@
         </div>
     </div>
     <!-- ↑ここまで -->
-    <div class="col-lg-9">
+    <div class="col-xs-9">
       <h2>Users</h2>
-    <table class="table table-striped">
+    <table class="table">
       <thead>
         <tr>
-          <th>Title</th>
-          <th>Body</th>
+          <th>image</th>
+          <th>name</th>
           <th colspan="3"></th>
         </tr>
       </thead>
@@ -59,8 +59,9 @@
       <tbody>
         <% @users.each do |user| %>
           <tr>
-            <td><%= attachment_image_tag @user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg", size:'40x40' %></td>
+            <td><%= attachment_image_tag user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg", size:'40x40' %></td>
             <td><%= user.name %></td>
+            <td><%= link_to 'Show', user_path(user) %></td>
 
 
           </tr>
